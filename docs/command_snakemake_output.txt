@@ -1,0 +1,342 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job                                     count    min threads    max threads
+------------------------------------  -------  -------------  -------------
+all                                         1              1              1
+bam_to_mpileup                              1              1              1
+call_indels                                 1              1              1
+call_snps                                   1              1              1
+coordinate_sort_mapped_bam                  1              1              1
+filter_low_complexity                       2              1              1
+fixmate_bam                                 1              1              1
+link_fastq_files                            1              1              1
+link_reference_genomes                      1              1              1
+map_reads                                   1              1              1
+map_set_instructions                        1              1              1
+mark_duplicates_bam                         1              1              1
+name_sort_mapped_bam                        1              1              1
+percent_identity_variance_filter_sam        1              1              1
+repair_fastq                                1              1              1
+sam_to_bam_mapped_reads                     1              1              1
+trim_adapter_sequences                      2              1              1
+write_mapped_only_sam                       1              1              1
+write_read_counts                           1              1              1
+total                                      21              1              1
+
+Select jobs to execute...
+
+[Thu Jun 23 17:03:52 2022]
+rule link_fastq_files:
+    output: /pwd/PROCESSING/smk/03_link_fastq_files/TestSampleOne.R1.fastq, /pwd/PROCESSING/smk/03_link_fastq_files/TestSampleOne.R2.fastq, /pwd/PROCESSING/smk/03_link_fastq_files/TestSampleOne.R1.fastq.cmd, /pwd/PROCESSING/smk/03_link_fastq_files/TestSampleOne.R2.fastq.cmd
+    jobid: 3
+    reason: Missing output files: /pwd/PROCESSING/smk/03_link_fastq_files/TestSampleOne.R1.fastq, /pwd/PROCESSING/smk/03_link_fastq_files/TestSampleOne.R2.fastq
+    resources: tmpdir=/tmp
+
+[Thu Jun 23 17:03:53 2022]
+Finished job 3.
+1 of 21 steps (5%) done
+Select jobs to execute...
+
+[Thu Jun 23 17:03:53 2022]
+rule trim_adapter_sequences:
+    input: /pwd/PROCESSING/smk/03_link_fastq_files/TestSampleOne.R2.fastq
+    output: /pwd/PROCESSING/smk/04_trim_adapter_sequences/TestSampleOne.R2.trim.fastq, /pwd/PROCESSING/smk/04_trim_adapter_sequences/TestSampleOne.R2.trim.fastq.cmd
+    log: /pwd/PROCESSING/smk/04_trim_adapter_sequences/TestSampleOne.R2.trim_adapter_sequences.log
+    jobid: 18
+    reason: Missing output files: /pwd/PROCESSING/smk/04_trim_adapter_sequences/TestSampleOne.R2.trim.fastq; Input files updated by another job: /pwd/PROCESSING/smk/03_link_fastq_files/TestSampleOne.R2.fastq
+    wildcards: samples=TestSampleOne, pairs=2
+    resources: tmpdir=/tmp
+
+[Thu Jun 23 17:04:02 2022]
+Finished job 18.
+2 of 21 steps (10%) done
+Select jobs to execute...
+
+[Thu Jun 23 17:04:02 2022]
+rule filter_low_complexity:
+    input: /pwd/PROCESSING/smk/04_trim_adapter_sequences/TestSampleOne.R2.trim.fastq
+    output: /pwd/PROCESSING/smk/05_filter_low_complexity/TestSampleOne.R2.flc.fastq, /pwd/PROCESSING/smk/05_filter_low_complexity/TestSampleOne.R2.flc.fastq.cmd
+    log: /pwd/PROCESSING/smk/05_filter_low_complexity/TestSampleOne.R2.filter_low_complexity.log
+    jobid: 17
+    reason: Missing output files: /pwd/PROCESSING/smk/05_filter_low_complexity/TestSampleOne.R2.flc.fastq; Input files updated by another job: /pwd/PROCESSING/smk/04_trim_adapter_sequences/TestSampleOne.R2.trim.fastq
+    wildcards: samples=TestSampleOne, pairs=2
+    resources: tmpdir=/tmp
+
+[Thu Jun 23 17:04:07 2022]
+Finished job 17.
+3 of 21 steps (14%) done
+Removing temporary output /pwd/PROCESSING/smk/04_trim_adapter_sequences/TestSampleOne.R2.trim.fastq.
+Select jobs to execute...
+
+[Thu Jun 23 17:04:07 2022]
+rule trim_adapter_sequences:
+    input: /pwd/PROCESSING/smk/03_link_fastq_files/TestSampleOne.R1.fastq
+    output: /pwd/PROCESSING/smk/04_trim_adapter_sequences/TestSampleOne.R1.trim.fastq, /pwd/PROCESSING/smk/04_trim_adapter_sequences/TestSampleOne.R1.trim.fastq.cmd
+    log: /pwd/PROCESSING/smk/04_trim_adapter_sequences/TestSampleOne.R1.trim_adapter_sequences.log
+    jobid: 16
+    reason: Missing output files: /pwd/PROCESSING/smk/04_trim_adapter_sequences/TestSampleOne.R1.trim.fastq; Input files updated by another job: /pwd/PROCESSING/smk/03_link_fastq_files/TestSampleOne.R1.fastq
+    wildcards: samples=TestSampleOne, pairs=1
+    resources: tmpdir=/tmp
+
+[Thu Jun 23 17:04:18 2022]
+Finished job 16.
+4 of 21 steps (19%) done
+Select jobs to execute...
+
+[Thu Jun 23 17:04:18 2022]
+rule filter_low_complexity:
+    input: /pwd/PROCESSING/smk/04_trim_adapter_sequences/TestSampleOne.R1.trim.fastq
+    output: /pwd/PROCESSING/smk/05_filter_low_complexity/TestSampleOne.R1.flc.fastq, /pwd/PROCESSING/smk/05_filter_low_complexity/TestSampleOne.R1.flc.fastq.cmd
+    log: /pwd/PROCESSING/smk/05_filter_low_complexity/TestSampleOne.R1.filter_low_complexity.log
+    jobid: 15
+    reason: Missing output files: /pwd/PROCESSING/smk/05_filter_low_complexity/TestSampleOne.R1.flc.fastq; Input files updated by another job: /pwd/PROCESSING/smk/04_trim_adapter_sequences/TestSampleOne.R1.trim.fastq
+    wildcards: samples=TestSampleOne, pairs=1
+    resources: tmpdir=/tmp
+
+[Thu Jun 23 17:04:23 2022]
+Finished job 15.
+5 of 21 steps (24%) done
+Removing temporary output /pwd/PROCESSING/smk/04_trim_adapter_sequences/TestSampleOne.R1.trim.fastq.
+Select jobs to execute...
+
+[Thu Jun 23 17:04:23 2022]
+rule repair_fastq:
+    input: /pwd/PROCESSING/smk/05_filter_low_complexity/TestSampleOne.R1.flc.fastq, /pwd/PROCESSING/smk/05_filter_low_complexity/TestSampleOne.R2.flc.fastq
+    output: /pwd/PROCESSING/smk/06_repair_fastq/TestSampleOne.R1.repair.fastq, /pwd/PROCESSING/smk/06_repair_fastq/TestSampleOne.R2.repair.fastq, /pwd/PROCESSING/smk/06_repair_fastq/TestSampleOne.singleton.repair.fastq, /pwd/PROCESSING/smk/06_repair_fastq/TestSampleOne.repair.fastq.cmd
+    log: /pwd/PROCESSING/smk/06_repair_fastq/TestSampleOne.repair_fastq.log
+    jobid: 14
+    reason: Missing output files: /pwd/PROCESSING/smk/06_repair_fastq/TestSampleOne.R1.repair.fastq, /pwd/PROCESSING/smk/06_repair_fastq/TestSampleOne.R2.repair.fastq; Input files updated by another job: /pwd/PROCESSING/smk/05_filter_low_complexity/TestSampleOne.R2.flc.fastq, /pwd/PROCESSING/smk/05_filter_low_complexity/TestSampleOne.R1.flc.fastq
+    wildcards: samples=TestSampleOne
+    resources: tmpdir=/tmp
+
+[Thu Jun 23 17:04:27 2022]
+Finished job 14.
+6 of 21 steps (29%) done
+Removing temporary output /pwd/PROCESSING/smk/05_filter_low_complexity/TestSampleOne.R1.flc.fastq.
+Removing temporary output /pwd/PROCESSING/smk/05_filter_low_complexity/TestSampleOne.R2.flc.fastq.
+Removing temporary output /pwd/PROCESSING/smk/06_repair_fastq/TestSampleOne.singleton.repair.fastq.
+Select jobs to execute...
+
+[Thu Jun 23 17:04:27 2022]
+rule map_set_instructions:
+    output: /pwd/PROCESSING/smk/01_map_set_instructions/TestSampleOne__NC_009334.1.map, /pwd/PROCESSING/smk/01_map_set_instructions/TestSampleOne__NC_009334.1.map.cmd
+    jobid: 1
+    reason: Missing output files: /pwd/PROCESSING/smk/01_map_set_instructions/TestSampleOne__NC_009334.1.map
+    resources: tmpdir=/tmp
+
+[Thu Jun 23 17:04:28 2022]
+Finished job 1.
+7 of 21 steps (33%) done
+Select jobs to execute...
+
+[Thu Jun 23 17:04:28 2022]
+rule link_reference_genomes:
+    output: /pwd/PROCESSING/smk/02_link_reference_genomes/NC_009334.1.fna, /pwd/PROCESSING/smk/02_link_reference_genomes/NC_009334.1_linking.cmd
+    jobid: 2
+    reason: Missing output files: /pwd/PROCESSING/smk/02_link_reference_genomes/NC_009334.1.fna
+    resources: tmpdir=/tmp
+
+[Thu Jun 23 17:04:29 2022]
+Finished job 2.
+8 of 21 steps (38%) done
+Select jobs to execute...
+
+[Thu Jun 23 17:04:29 2022]
+rule map_reads:
+    input: /pwd/PROCESSING/smk/01_map_set_instructions/TestSampleOne__NC_009334.1.map, /pwd/PROCESSING/smk/06_repair_fastq/TestSampleOne.R1.repair.fastq, /pwd/PROCESSING/smk/06_repair_fastq/TestSampleOne.R2.repair.fastq, /pwd/PROCESSING/smk/02_link_reference_genomes/NC_009334.1.fna
+    output: /pwd/PROCESSING/smk/07_map_reads/TestSampleOne__NC_009334.1.bam, /pwd/PROCESSING/smk/07_map_reads/TestSampleOne__NC_009334.1.bam.cmd
+    log: /pwd/PROCESSING/smk/07_map_reads/TestSampleOne__NC_009334.1.map_reads.log
+    jobid: 13
+    reason: Missing output files: /pwd/PROCESSING/smk/07_map_reads/TestSampleOne__NC_009334.1.bam; Input files updated by another job: /pwd/PROCESSING/smk/06_repair_fastq/TestSampleOne.R1.repair.fastq, /pwd/PROCESSING/smk/01_map_set_instructions/TestSampleOne__NC_009334.1.map, /pwd/PROCESSING/smk/02_link_reference_genomes/NC_009334.1.fna, /pwd/PROCESSING/smk/06_repair_fastq/TestSampleOne.R2.repair.fastq
+    wildcards: sample=TestSampleOne, reference=NC_009334.1
+    resources: tmpdir=/tmp
+
+[Thu Jun 23 17:04:38 2022]
+Finished job 13.
+9 of 21 steps (43%) done
+Removing temporary output /pwd/PROCESSING/smk/06_repair_fastq/TestSampleOne.R1.repair.fastq.
+Removing temporary output /pwd/PROCESSING/smk/06_repair_fastq/TestSampleOne.R2.repair.fastq.
+Select jobs to execute...
+
+[Thu Jun 23 17:04:38 2022]
+rule write_mapped_only_sam:
+    input: /pwd/PROCESSING/smk/07_map_reads/TestSampleOne__NC_009334.1.bam
+    output: /pwd/PROCESSING/smk/08_write_mapped_only_sam/TestSampleOne__NC_009334.1.mapped.sam, /pwd/PROCESSING/smk/08_write_mapped_only_sam/TestSampleOne__NC_009334.1.mapped.sam.cmd
+    jobid: 12
+    reason: Missing output files: /pwd/PROCESSING/smk/08_write_mapped_only_sam/TestSampleOne__NC_009334.1.mapped.sam; Input files updated by another job: /pwd/PROCESSING/smk/07_map_reads/TestSampleOne__NC_009334.1.bam
+    wildcards: instructions=TestSampleOne__NC_009334.1
+    resources: tmpdir=/tmp
+
+[Thu Jun 23 17:04:53 2022]
+Finished job 12.
+10 of 21 steps (48%) done
+Removing temporary output /pwd/PROCESSING/smk/07_map_reads/TestSampleOne__NC_009334.1.bam.
+Select jobs to execute...
+
+[Thu Jun 23 17:04:53 2022]
+rule percent_identity_variance_filter_sam:
+    input: /pwd/PROCESSING/smk/08_write_mapped_only_sam/TestSampleOne__NC_009334.1.mapped.sam
+    output: /pwd/PROCESSING/smk/09_percent_identity_variance_filter_sam/TestSampleOne__NC_009334.1.pidv.sam, /pwd/PROCESSING/smk/09_percent_identity_variance_filter_sam/TestSampleOne__NC_009334.1.pidv.log, /pwd/PROCESSING/smk/09_percent_identity_variance_filter_sam/TestSampleOne__NC_009334.1.pidv.sam.cmd
+    jobid: 11
+    reason: Missing output files: /pwd/PROCESSING/smk/09_percent_identity_variance_filter_sam/TestSampleOne__NC_009334.1.pidv.sam; Input files updated by another job: /pwd/PROCESSING/smk/08_write_mapped_only_sam/TestSampleOne__NC_009334.1.mapped.sam
+    wildcards: instructions=TestSampleOne__NC_009334.1
+    resources: tmpdir=/tmp
+
+[Thu Jun 23 17:05:05 2022]
+Finished job 11.
+11 of 21 steps (52%) done
+Removing temporary output /pwd/PROCESSING/smk/08_write_mapped_only_sam/TestSampleOne__NC_009334.1.mapped.sam.
+Select jobs to execute...
+
+[Thu Jun 23 17:05:05 2022]
+rule sam_to_bam_mapped_reads:
+    input: /pwd/PROCESSING/smk/09_percent_identity_variance_filter_sam/TestSampleOne__NC_009334.1.pidv.sam
+    output: /pwd/PROCESSING/smk/10_sam_to_bam_mapped_reads/TestSampleOne__NC_009334.1.bam, /pwd/PROCESSING/smk/10_sam_to_bam_mapped_reads/TestSampleOne__NC_009334.1.bam.cmd
+    jobid: 10
+    reason: Missing output files: /pwd/PROCESSING/smk/10_sam_to_bam_mapped_reads/TestSampleOne__NC_009334.1.bam; Input files updated by another job: /pwd/PROCESSING/smk/09_percent_identity_variance_filter_sam/TestSampleOne__NC_009334.1.pidv.sam
+    wildcards: instructions=TestSampleOne__NC_009334.1
+    resources: tmpdir=/tmp
+
+[Thu Jun 23 17:05:09 2022]
+Finished job 10.
+12 of 21 steps (57%) done
+Removing temporary output /pwd/PROCESSING/smk/09_percent_identity_variance_filter_sam/TestSampleOne__NC_009334.1.pidv.sam.
+Select jobs to execute...
+
+[Thu Jun 23 17:05:09 2022]
+rule name_sort_mapped_bam:
+    input: /pwd/PROCESSING/smk/10_sam_to_bam_mapped_reads/TestSampleOne__NC_009334.1.bam
+    output: /pwd/PROCESSING/smk/11_name_sort_mapped_bam/TestSampleOne__NC_009334.1.nsort.bam, /pwd/PROCESSING/smk/11_name_sort_mapped_bam/TestSampleOne__NC_009334.1.nsort.bam.cmd
+    jobid: 9
+    reason: Missing output files: /pwd/PROCESSING/smk/11_name_sort_mapped_bam/TestSampleOne__NC_009334.1.nsort.bam; Input files updated by another job: /pwd/PROCESSING/smk/10_sam_to_bam_mapped_reads/TestSampleOne__NC_009334.1.bam
+    wildcards: instructions=TestSampleOne__NC_009334.1
+    resources: tmpdir=/tmp
+
+[Thu Jun 23 17:05:13 2022]
+Finished job 9.
+13 of 21 steps (62%) done
+Removing temporary output /pwd/PROCESSING/smk/10_sam_to_bam_mapped_reads/TestSampleOne__NC_009334.1.bam.
+Select jobs to execute...
+
+[Thu Jun 23 17:05:13 2022]
+rule fixmate_bam:
+    input: /pwd/PROCESSING/smk/11_name_sort_mapped_bam/TestSampleOne__NC_009334.1.nsort.bam
+    output: /pwd/PROCESSING/smk/12_fixmate_bam/TestSampleOne__NC_009334.1.fixmate.bam, /pwd/PROCESSING/smk/12_fixmate_bam/TestSampleOne__NC_009334.1.fixmate.bam.cmd
+    jobid: 8
+    reason: Missing output files: /pwd/PROCESSING/smk/12_fixmate_bam/TestSampleOne__NC_009334.1.fixmate.bam; Input files updated by another job: /pwd/PROCESSING/smk/11_name_sort_mapped_bam/TestSampleOne__NC_009334.1.nsort.bam
+    wildcards: instructions=TestSampleOne__NC_009334.1
+    resources: tmpdir=/tmp
+
+[Thu Jun 23 17:05:16 2022]
+Finished job 8.
+14 of 21 steps (67%) done
+Removing temporary output /pwd/PROCESSING/smk/11_name_sort_mapped_bam/TestSampleOne__NC_009334.1.nsort.bam.
+Select jobs to execute...
+
+[Thu Jun 23 17:05:16 2022]
+rule coordinate_sort_mapped_bam:
+    input: /pwd/PROCESSING/smk/12_fixmate_bam/TestSampleOne__NC_009334.1.fixmate.bam
+    output: /pwd/PROCESSING/smk/13_coordinate_sort_mapped_bam/TestSampleOne__NC_009334.1.sort.bam, /pwd/PROCESSING/smk/13_coordinate_sort_mapped_bam/TestSampleOne__NC_009334.1.sort.bam.cmd
+    jobid: 7
+    reason: Missing output files: /pwd/PROCESSING/smk/13_coordinate_sort_mapped_bam/TestSampleOne__NC_009334.1.sort.bam; Input files updated by another job: /pwd/PROCESSING/smk/12_fixmate_bam/TestSampleOne__NC_009334.1.fixmate.bam
+    wildcards: instructions=TestSampleOne__NC_009334.1
+    resources: tmpdir=/tmp
+
+[Thu Jun 23 17:05:19 2022]
+Finished job 7.
+15 of 21 steps (71%) done
+Removing temporary output /pwd/PROCESSING/smk/12_fixmate_bam/TestSampleOne__NC_009334.1.fixmate.bam.
+Select jobs to execute...
+
+[Thu Jun 23 17:05:19 2022]
+rule mark_duplicates_bam:
+    input: /pwd/PROCESSING/smk/13_coordinate_sort_mapped_bam/TestSampleOne__NC_009334.1.sort.bam
+    output: /pwd/PROCESSING/smk/14_mark_duplicates_bam/TestSampleOne__NC_009334.1.dedup.bam, /pwd/PROCESSING/smk/14_mark_duplicates_bam/TestSampleOne__NC_009334.1.dedup.bam.cmd
+    log: /pwd/PROCESSING/smk/14_mark_duplicates_bam/TestSampleOne__NC_009334.1.mark_duplicates_bam.log
+    jobid: 6
+    reason: Missing output files: /pwd/PROCESSING/smk/14_mark_duplicates_bam/TestSampleOne__NC_009334.1.dedup.bam; Input files updated by another job: /pwd/PROCESSING/smk/13_coordinate_sort_mapped_bam/TestSampleOne__NC_009334.1.sort.bam
+    wildcards: instructions=TestSampleOne__NC_009334.1
+    resources: tmpdir=/tmp
+
+[Thu Jun 23 17:05:22 2022]
+Finished job 6.
+16 of 21 steps (76%) done
+Removing temporary output /pwd/PROCESSING/smk/13_coordinate_sort_mapped_bam/TestSampleOne__NC_009334.1.sort.bam.
+Select jobs to execute...
+
+[Thu Jun 23 17:05:22 2022]
+rule bam_to_mpileup:
+    input: /pwd/PROCESSING/smk/14_mark_duplicates_bam/TestSampleOne__NC_009334.1.dedup.bam, /pwd/PROCESSING/smk/02_link_reference_genomes/NC_009334.1.fna
+    output: /pwd/PROCESSING/smk/15_bam_to_mpileup/TestSampleOne__NC_009334.1.mpileup, /pwd/PROCESSING/smk/15_bam_to_mpileup/TestSampleOne__NC_009334.1.mpileup.cmd
+    log: /pwd/PROCESSING/smk/15_bam_to_mpileup/TestSampleOne__NC_009334.1.bam_to_mpileup.log
+    jobid: 5
+    reason: Missing output files: /pwd/PROCESSING/smk/15_bam_to_mpileup/TestSampleOne__NC_009334.1.mpileup; Input files updated by another job: /pwd/PROCESSING/smk/14_mark_duplicates_bam/TestSampleOne__NC_009334.1.dedup.bam, /pwd/PROCESSING/smk/02_link_reference_genomes/NC_009334.1.fna
+    wildcards: sample=TestSampleOne, reference=NC_009334.1
+    resources: tmpdir=/tmp
+
+[Thu Jun 23 17:05:27 2022]
+Finished job 5.
+17 of 21 steps (81%) done
+Removing temporary output /pwd/PROCESSING/smk/14_mark_duplicates_bam/TestSampleOne__NC_009334.1.dedup.bam.
+Select jobs to execute...
+
+[Thu Jun 23 17:05:27 2022]
+rule call_snps:
+    input: /pwd/PROCESSING/smk/15_bam_to_mpileup/TestSampleOne__NC_009334.1.mpileup
+    output: /pwd/PROCESSING/smk/16_call_snps/TestSampleOne__NC_009334.1.snps.vcf, /pwd/PROCESSING/smk/16_call_snps/TestSampleOne__NC_009334.1.snps.vcf.cmd
+    log: /pwd/PROCESSING/smk/16_call_snps/TestSampleOne__NC_009334.1.call_snps.log
+    jobid: 4
+    reason: Missing output files: /pwd/PROCESSING/smk/16_call_snps/TestSampleOne__NC_009334.1.snps.vcf; Input files updated by another job: /pwd/PROCESSING/smk/15_bam_to_mpileup/TestSampleOne__NC_009334.1.mpileup
+    wildcards: instructions=TestSampleOne__NC_009334.1
+    resources: tmpdir=/tmp
+
+[Thu Jun 23 17:05:39 2022]
+Finished job 4.
+18 of 21 steps (86%) done
+Select jobs to execute...
+
+[Thu Jun 23 17:05:39 2022]
+rule call_indels:
+    input: /pwd/PROCESSING/smk/15_bam_to_mpileup/TestSampleOne__NC_009334.1.mpileup
+    output: /pwd/PROCESSING/smk/17_call_indels/TestSampleOne__NC_009334.1.indels.vcf, /pwd/PROCESSING/smk/17_call_indels/TestSampleOne__NC_009334.1.indels.vcf.cmd
+    log: /pwd/PROCESSING/smk/17_call_indels/TestSampleOne__NC_009334.1.call_indels.log
+    jobid: 19
+    reason: Missing output files: /pwd/PROCESSING/smk/17_call_indels/TestSampleOne__NC_009334.1.indels.vcf; Input files updated by another job: /pwd/PROCESSING/smk/15_bam_to_mpileup/TestSampleOne__NC_009334.1.mpileup
+    wildcards: instructions=TestSampleOne__NC_009334.1
+    resources: tmpdir=/tmp
+
+[Thu Jun 23 17:05:48 2022]
+Finished job 19.
+19 of 21 steps (90%) done
+Select jobs to execute...
+
+[Thu Jun 23 17:05:48 2022]
+rule write_read_counts:
+    input: /pwd/PROCESSING/smk/15_bam_to_mpileup/TestSampleOne__NC_009334.1.mpileup
+    output: /pwd/PROCESSING/smk/18_write_read_counts/TestSampleOne__NC_009334.1.counts, /pwd/PROCESSING/smk/18_write_read_counts/TestSampleOne__NC_009334.1.counts.cmd
+    log: /pwd/PROCESSING/smk/18_write_read_counts/TestSampleOne__NC_009334.1.write_read_counts.log
+    jobid: 20
+    reason: Missing output files: /pwd/PROCESSING/smk/18_write_read_counts/TestSampleOne__NC_009334.1.counts; Input files updated by another job: /pwd/PROCESSING/smk/15_bam_to_mpileup/TestSampleOne__NC_009334.1.mpileup
+    wildcards: instructions=TestSampleOne__NC_009334.1
+    resources: tmpdir=/tmp
+
+[Thu Jun 23 17:09:29 2022]
+Finished job 20.
+20 of 21 steps (95%) done
+Removing temporary output /pwd/PROCESSING/smk/15_bam_to_mpileup/TestSampleOne__NC_009334.1.mpileup.
+Select jobs to execute...
+
+[Thu Jun 23 17:09:29 2022]
+localrule all:
+    input: /pwd/PROCESSING/smk/01_map_set_instructions/TestSampleOne__NC_009334.1.map, /pwd/PROCESSING/smk/02_link_reference_genomes/NC_009334.1.fna, /pwd/PROCESSING/smk/03_link_fastq_files/TestSampleOne.R1.fastq, /pwd/PROCESSING/smk/03_link_fastq_files/TestSampleOne.R2.fastq, /pwd/PROCESSING/smk/16_call_snps/TestSampleOne__NC_009334.1.snps.vcf, /pwd/PROCESSING/smk/17_call_indels/TestSampleOne__NC_009334.1.indels.vcf, /pwd/PROCESSING/smk/18_write_read_counts/TestSampleOne__NC_009334.1.counts
+    jobid: 0
+    reason: Input files updated by another job: /pwd/PROCESSING/smk/02_link_reference_genomes/NC_009334.1.fna, /pwd/PROCESSING/smk/03_link_fastq_files/TestSampleOne.R2.fastq, /pwd/PROCESSING/smk/03_link_fastq_files/TestSampleOne.R1.fastq, /pwd/PROCESSING/smk/01_map_set_instructions/TestSampleOne__NC_009334.1.map, /pwd/PROCESSING/smk/18_write_read_counts/TestSampleOne__NC_009334.1.counts, /pwd/PROCESSING/smk/17_call_indels/TestSampleOne__NC_009334.1.indels.vcf, /pwd/PROCESSING/smk/16_call_snps/TestSampleOne__NC_009334.1.snps.vcf
+    resources: tmpdir=/tmp
+
+[Thu Jun 23 17:09:29 2022]
+Finished job 0.
+21 of 21 steps (100%) done
+Complete log: .snakemake/log/2022-06-23T170351.341759.snakemake.log
