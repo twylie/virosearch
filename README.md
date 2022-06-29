@@ -75,10 +75,10 @@ As an example of the utility of **ViroSearch**, we analyzed Epstein Barr Virus (
 
 **Citation**
 
-> Todd N. Wylie, Madison Eschbach, Haley Gula, Vikas R. Dharnidharka, Kristine M. Wylie
+> Todd N. Wylie, Madison Eschbach, Haley Gula, Vikas R. Dharnidharka, Kristine M. Wylie \
 *"An automated approach to Epstein Barr Virus variant interpretation in PTLD-derived next-generation sequences as presented by the PTLD-MSMS group."
-American Society for Virology*
-The University of Wisconsin-Madison Madison, Wisconsin
+American Society for Virology* \
+The University of Wisconsin-Madison Madison, Wisconsin \
 July 16-20, 2022
 
 ## Future Directions
