@@ -9,10 +9,10 @@ Here we provide a self-contained suite of tools to download and index reference 
 
 While the impetuous for developing **ViroSearch** was to study Epstein Barr Virus (EBV) associated sequence variants within hundreds of samples derived from patients with post-transplant lymphoproliferative disorders (PTLDs), the **ViroSearch** suite of tools provides a generic platform for downloading other reference genomes and calling sample-associated variants. 
 
+## Abstract
+
 > **Note**
 > We are currently adding support for custom databases of EBV-related variants associated with published biological functions, as well as tools to intersect, review, and assess variants across a given cohort of samples.
-
-## Abstract
 
 Metagenomic shotgun sequencing (MSS) is a powerful tool to study human viruses and their roles in acute and chronic infections, providing the sensitivity to highlight nucleotide-level variation among viruses. The subsequent time and personnel required to impute the biological significance of such sequence variants is a bottleneck in analysis, historically requiring manual literature searches and association with previously established knowledge of related sequence data.
 
@@ -745,7 +745,7 @@ View the current arguments for `virosearch getref` command:
 docker container run twylie/virosearch:latest virosearch getref --help
 ```
 
-#### Arguments
+#### getref Arguments
 
 **Command**|**Argument**|**Format**|**Required**|**Default**|**Description**
 :-----:|:-----:|:-----:|:-----:|:-----:|:-----:
@@ -886,7 +886,7 @@ View the current arguments for `virosearch getref` command:
 docker container run twylie/virosearch:latest virosearch indexref --help
 ```
 
-#### Arguments
+#### indexref Arguments
 
 **Command**|**Argument**|**Format**|**Required**|**Default**|**Description**
 :-----:|:-----:|:-----:|:-----:|:-----:|:-----:
@@ -1120,7 +1120,7 @@ View the current arguments for `virosearch varcallpe` command:
 docker container run twylie/virosearch:latest virosearch varcallpe --help
 ```
 
-#### Arguments
+#### varcallpe Arguments
 
 **Command**|**Argument**|**Format**|**Required**|**Default**|**Description**
 :-----:|:-----:|:-----:|:-----:|:-----:|:-----:
@@ -1355,7 +1355,7 @@ PROCESSING
 
 The **ViroSearch** `washupp` command will extend an existing processing directory as created by the `virosearch varcallpe` command for parallel processing using LSF and **compute1** at Washington University School of Medicine. Calling `virosearch varcallpe` prepares a processing directory for running the variant calling pipeline without the assumption of processing on a compute cluster---i.e. assumess non-parallel processing. Running `virosearch washupp` will add configuration and cluster submission files to a preexisting processing directory, as well as a head-node execution command.
 
-#### Arguments
+#### washupp Arguments
 
 **Command**|**Argument**|**Format**|**Required**|**Default**|**Description**
 :-----:|:-----:|:-----:|:-----:|:-----:|:-----:
