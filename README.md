@@ -1626,11 +1626,11 @@ All of the FASTQ sequence files, provided by the `--sample-key` file path argume
 
 4. **trim_adapter_sequences**
 
-*OPTIONAL STEP*: The paired FASTQ files are adaptor trimmed in this step. Reads will be trimmed for adaptor, sequences will be trimmed/revised based on end-quality, reads will be filtered based on the percent of N’s allowed post-trimming, and too-short reads will be removed. This step is run by default; however, providing the `--no-trim` flag will skip over this step in the pipeline. See [Arguments](https://github.com/twylie/virosearch#varcallpe-arguments) for related options.
+*OPTIONAL STEP*: The paired FASTQ files are adaptor trimmed in this step. Reads will be trimmed for adaptor, sequences will be trimmed/revised based on end-quality, reads will be filtered based on the percent of N’s allowed post-trimming, and too-short reads will be removed. This step is run by default; however, providing the `--no-trim` flag will skip over this step in the pipeline. See [varcallpe Arguments](https://github.com/twylie/virosearch#varcallpe-arguments) for related options.
 
 5. **filter_low_complexity**
 
-*OPTIONAL STEP*: The paired FASTQ files are evaluated for low-complexity in this step. Low-complexity bases are "hard masked" as N’s in this step. Reads will also be filtered based on the percent of Ns allowed post-trimming. This step is run by default; however, providing the `--no-lcf` flag will skip over this step in the pipeline. See [Arguments](https://github.com/twylie/virosearch#varcallpe-arguments) for related options.
+*OPTIONAL STEP*: The paired FASTQ files are evaluated for low-complexity in this step. Low-complexity bases are "hard masked" as N’s in this step. Reads will also be filtered based on the percent of Ns allowed post-trimming. This step is run by default; however, providing the `--no-lcf` flag will skip over this step in the pipeline. See [varcallpe Arguments](https://github.com/twylie/virosearch#varcallpe-arguments) for related options.
 
 6. **repair_fastq**
 
@@ -1646,18 +1646,18 @@ For all of the mappings, we write a SAM file containing only mapped reads.
 
 9. **percent_identity_variance_filter_sam**
 
-*OPTIONAL STEP*: The percent identity variance filter (PIDV) evaluates all mapped reads on a per-hit basis, evaluating the percent variance/difference from its reference genome placement. Hits not meeting a PIDV requirement will be removed from downstream processing. The PIDV step will produce a SAM file that can have a mixture of PE and singleton reads of mapped and unmapped reads. Therefore, output from the PIDV filter step---or the `--no-pidv` skipped version---will be a SAM file ready for samtools view filtering based on SAM/BAM flags. See [Arguments](https://github.com/twylie/virosearch#varcallpe-arguments) for related options.
+*OPTIONAL STEP*: The percent identity variance filter (PIDV) evaluates all mapped reads on a per-hit basis, evaluating the percent variance/difference from its reference genome placement. Hits not meeting a PIDV requirement will be removed from downstream processing. The PIDV step will produce a SAM file that can have a mixture of PE and singleton reads of mapped and unmapped reads. Therefore, output from the PIDV filter step---or the `--no-pidv` skipped version---will be a SAM file ready for samtools view filtering based on SAM/BAM flags. See [varcallpe Arguments](https://github.com/twylie/virosearch#varcallpe-arguments) for related options.
 
 10. **sam_to_bam_mapped_reads**
 
-We now convert the SAM file to BAM for input to creating a mpileup file required for variant calling. The resultant BAM file will be determined by the samtools view arguments provided in the configuration file. For example, if the `--only-properly-paired` flag was supplied, then we will only output properly paired reads in the BAM file. If `--no-singletons` was supplied, no singletons will be included in the BAM file. Other options also define which hits will be included in the BAM and considered during downstream variant calling. See [Arguments](https://github.com/twylie/virosearch#varcallpe-arguments) for related options.
+We now convert the SAM file to BAM for input to creating a mpileup file required for variant calling. The resultant BAM file will be determined by the samtools view arguments provided in the configuration file. For example, if the `--only-properly-paired` flag was supplied, then we will only output properly paired reads in the BAM file. If `--no-singletons` was supplied, no singletons will be included in the BAM file. Other options also define which hits will be included in the BAM and considered during downstream variant calling. See [varcallpe Arguments](https://github.com/twylie/virosearch#varcallpe-arguments) for related options.
 
 11. **name_sort_mapped_bam**
 12. **fixmate_bam**
 13. **coordinate_sort_mapped_bam**
 14. **mark_duplicates_bam**
 
-*OPTIONAL STEP*: This entire section runs conceptually as a block; all steps are required for marking and removing mapped read duplicates. Deduplication may be skipped entirely if the `--no-dedup` flag was provided. In order to mark and remove duplicates, we will fix the mate pair score information and associated fields in the BAM using samtools fixmate. Prior to running fixmate, the BAM must be name sorted; however, the BAM must be sorted on mapped read coordinates prior to running samtools markdup. The final BAM will have had duplicates removed. Id the deduplication step is skipped, then the BAM is only coordinate sorted in this step. See [Arguments](https://github.com/twylie/virosearch#varcallpe-arguments) for related options.
+*OPTIONAL STEP*: This entire section runs conceptually as a block; all steps are required for marking and removing mapped read duplicates. Deduplication may be skipped entirely if the `--no-dedup` flag was provided. In order to mark and remove duplicates, we will fix the mate pair score information and associated fields in the BAM using samtools fixmate. Prior to running fixmate, the BAM must be name sorted; however, the BAM must be sorted on mapped read coordinates prior to running samtools markdup. The final BAM will have had duplicates removed. Id the deduplication step is skipped, then the BAM is only coordinate sorted in this step. See [varcallpe Arguments](https://github.com/twylie/virosearch#varcallpe-arguments) for related options.
 
 15. **bam_to_mpileup**
 
@@ -1665,15 +1665,15 @@ In order to call variants, we must produce an input mpileup file for each mapped
 
 16. **call_SNPs**
 
-The mpileup representation of mapped reads is used to call single nucleotide variants in this step. Output will be a [VCF file](https://en.wikipedia.org/wiki/Variant_Call_Format) for each mapping association. See [Arguments](https://github.com/twylie/virosearch#varcallpe-arguments) for related options.
+The mpileup representation of mapped reads is used to call single nucleotide variants in this step. Output will be a [VCF file](https://en.wikipedia.org/wiki/Variant_Call_Format) for each mapping association. See [varcallpe Arguments](https://github.com/twylie/virosearch#varcallpe-arguments) for related options.
 
 17. **call_indels**
 
-The mpileup representation of mapped reads is used to call small INDELs in this step. Output will be a [VCF file](https://en.wikipedia.org/wiki/Variant_Call_Format) for each mapping association. See [Arguments](https://github.com/twylie/virosearch#varcallpe-arguments) for related options.
+The mpileup representation of mapped reads is used to call small INDELs in this step. Output will be a [VCF file](https://en.wikipedia.org/wiki/Variant_Call_Format) for each mapping association. See [varcallpe Arguments](https://github.com/twylie/virosearch#varcallpe-arguments) for related options.
 
 18. **write_read_counts**
 
-We write read coverage metrics of reference genomes for the variant calls based on input mpileup files. Coverage depth requirements may be altered with the `--counts-min-coverage` and `--counts-min-base-qual` arguments. See [Arguments](https://github.com/twylie/virosearch#varcallpe-arguments) for related options.
+We write read coverage metrics of reference genomes for the variant calls based on input mpileup files. Coverage depth requirements may be altered with the `--counts-min-coverage` and `--counts-min-base-qual` arguments. See [varcallpe Arguments](https://github.com/twylie/virosearch#varcallpe-arguments) for related options.
 
 ## Third Party Dependencies
 
@@ -1794,7 +1794,7 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 
 ## Documentation Version
 
-[https://github.com/twylie/virosearch](https://github.com/twylie/virosearch)
+[https://github.com/twylie/virosearch](https://github.com/twylie/virosearch) \
 Version 7 \
 ViroSearch (Revision 18) \
 Documentation Copyright (C) 2022 by T.N. Wylie. \
