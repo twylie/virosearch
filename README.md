@@ -1579,7 +1579,7 @@ The Snakefile is technically the pipeline in terms of code that defines and exec
 
 Here is a conceptual overview---or rule graph---of the steps in the variant calling portion of **ViroSearch**.
 
-<img src="docs/rulegraph.png" width="100%" height="45%" border=0 style="border:0; text-decoration:none; outline:none">
+<img src="docs/rulegraph.png" width="65%" height="45%" border=0 style="border:0; text-decoration:none; outline:none">
 
 The following workflow was produced by Snakemake and shows the general directed acyclic graph (DAG) for the steps in the pipeline. Steps are described in more detail below.
 
