@@ -76,7 +76,7 @@ As an example of the utility of **ViroSearch**, we analyzed Epstein Barr Virus (
 **Citation**
 
 > Todd N. Wylie, Madison Eschbach, Haley Gula, Vikas R. Dharnidharka, Kristine M. Wylie \
-*"An automated approach to Epstein Barr Virus variant interpretation in PTLD-derived next-generation sequences as presented by the PTLD-MSMS group."
+*"An automated approach to Epstein Barr Virus variant interpretation in PTLD-derived next-generation sequences as presented by the PTLD-MSMS group." \
 American Society for Virology* \
 The University of Wisconsin-Madison Madison, Wisconsin \
 July 16-20, 2022
@@ -103,8 +103,7 @@ The **ViroSearch** suite of tools expects paired-end, short read sequences. We h
 
 For examples, see:
 
-[example/fastq/sample1.100k.r1.fastq.gz](example/fastq/sample1.100k.r1.fastq.gz)	
-[example/fastq/sample1.100k.r2.fastq.gz](example/fastq/sample1.100k.r2.fastq.gz)
+[example/fastq/](example/fastq/)	
 
 ## EBV Genome References
 
@@ -115,7 +114,7 @@ We provide two EBV RefSeq reference genomes indexed and ready for use with **Vir
 
 These files may be obtained by downloading the following directory:
 
-[referencesDB/](referencesDB/)
+[ref_EBV/](ref_EBV/)
 
 These references may also be reconstructed independently using the following commands.
 
