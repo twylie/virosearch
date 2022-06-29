@@ -185,7 +185,7 @@ To run the sample key and corresponding test data through the **ViroSearch** pip
 
 ## Recommended Parameters for EBV Variant Calling
 
-Read filtering and variant calling parameters can have a very large affect on the number of potential variants called on a sample. Reference genome complexity---e.g. repeat content, nucleotide distribution, rearrangements---can also contribute to potential false positive variant rates. Requirements for read-depth coverage prior to calling variants can also help weed out potential noise. For these reasons, **ViroSearch** tools have many options and settings (see [virosearch varcallpe Arguments](https://github.com/twylie/virosearch#varcallpe-arguments) for related options).
+Read filtering and variant calling parameters can have a very large affect on the number of potential variants called on a sample. Reference genome complexity---e.g. repeat content, nucleotide distribution, rearrangements---can also contribute to potential false positive variant rates. Requirements for read-depth coverage prior to calling variants can also help weed out potential noise. For these reasons, **ViroSearch** tools have many options and settings (see [varcallpe Arguments](https://github.com/twylie/virosearch#varcallpe-arguments) for related options).
 
 For example, the most lenient version of running the pipeline would skip read preparation and filtering, skip percent identity variance filtering for mapped reads, would not deduplicate mapped reads, promotes all SAM/BAM mapped read types to variant calling, and runs all variant calling parameters at their default. We would expect the following settings to produce some percentage of false positive variant calls:
 
@@ -1193,15 +1193,15 @@ TestSampleOne	NC_007605.1 NC_009334.1	/testing/sample1.100k.r1.fastq.gz	/testing
 
 The `virosearch varcallpe` command creates the following files within the `--results-dir` directory:
 
-`cmd.sh` --- An example shell command for running the variant calling pipeline. This command runs Snakemake on the variant calling pipeline (`varcallpe.smk`) Snakefile instructions.
+`cmd.sh`: An example shell command for running the variant calling pipeline. This command runs Snakemake on the variant calling pipeline (`varcallpe.smk`) Snakefile instructions.
 
-`config.yaml` --- A configuration file used by Snakemake when executing the variant calling pipeline. Essentially, all configuration and settings for the pipeline are contained within this file. This configuration is custom for this instance of running the pipeline, as defined by the arguments supplied in the `virosearch varcallpe` command.
+`config.yaml`: A configuration file used by Snakemake when executing the variant calling pipeline. Essentially, all configuration and settings for the pipeline are contained within this file. This configuration is custom for this instance of running the pipeline, as defined by the arguments supplied in the `virosearch varcallpe` command.
 
-`sample_key.tsv` --- A dataframe-friendly version of the sample key information provided under the `--sample-key` argument for `virosearch varcallpe` command.
+`sample_key.tsv`: A dataframe-friendly version of the sample key information provided under the `--sample-key` argument for `virosearch varcallpe` command.
 
-`varcallpe.smk` --- Code used by Snakemake to execute the full variant calling pipeline.
+`varcallpe.smk`: Code used by Snakemake to execute the full variant calling pipeline.
 
-`smk/` --- The default processing/results directory where Snakemake will write all of the pipeline output files. You can modify the path to output with the `--smk-dir` argument.
+`smk/`: The default processing/results directory where Snakemake will write all of the pipeline output files. You can modify the path to output with the `--smk-dir` argument.
 
 The fourth (and last) command executes the Snakemake variant calling pipeline using the example `PROCESSING/cmd.sh` shell command. Output from the pipeline write to `PROCESSING/smk/` directory.
 
@@ -1385,15 +1385,15 @@ docker container run -v $PWD:/pwd twylie/virosearch:latest virosearch washupp --
 
 The commands here are the same as those in the `virosearch varcallpe` example above, but we have added the last command to extend the processing directory to support parallel processing at Washington University. The following files were added to the processing directory by this command.
 
-`lsf_logs` --- The directory where all processes will write their LSF processing logs---e.g. error, output, LSF commands. By default this directory is within the processing directory created by the `--results-dir` path; however, a user may change the path using the `--lsf-log-dir` argument. It is a best practice to keep this directory on fast (WashU **scratch1**) disk space.
+`lsf_logs`: The directory where all processes will write their LSF processing logs---e.g. error, output, LSF commands. By default this directory is within the processing directory created by the `--results-dir` path; however, a user may change the path using the `--lsf-log-dir` argument. It is a best practice to keep this directory on fast (WashU **scratch1**) disk space.
 
-`smk/` ---  By default this directory is within the processing directory. This should be moved to WashU **storage1** disks space using the `virosearch varcallpe` `--smk-dir` argument, though, as output will be too large for **scratch1** space.
+`smk/`: By default this directory is within the processing directory. This should be moved to WashU **storage1** disks space using the `virosearch varcallpe` `--smk-dir` argument, though, as output will be too large for **scratch1** space.
 
-`submit_lsf.py` --- The LSF submission script used by Snakemake to launch child processes. Do not edit this script.
+`submit_lsf.py`: The LSF submission script used by Snakemake to launch child processes. Do not edit this script.
 
-`washu.yaml` -- The configuration file used by the `submit_lsf.py` LSF submission script. Do not edit this script.
+`washu.yaml`: The configuration file used by the `submit_lsf.py` LSF submission script. Do not edit this script.
 
-`washu.sh` --- An example Snakemake command for launching parallel processing at WashU. Should be launched as its own LSF job---see [Example Data Processing WashU Cluster](https://github.com/twylie/virosearch#example-data-processing-washu-cluster) for details.
+`washu.sh`: An example Snakemake command for launching parallel processing at WashU. Should be launched as its own LSF job---see [Example Data Processing WashU Cluster](https://github.com/twylie/virosearch#example-data-processing-washu-cluster) for details.
 
 **Results:**
 
@@ -1681,17 +1681,17 @@ We write read coverage metrics of reference genomes for the variant calls based 
 
 **Software**|**Version**|**License**|**Link**|**ViroSearch Usage**
 :-----:|:-----:|:-----:|:-----:|:-----:
-BBTools|38.96|BBTools copyright Lawrence Berkeley National Laboratory.|https://jgi.doe.gov/data-and-tools/software-tools/bbtools/bb-tools-user-guide/|Repairs FASTQ file entry pairings.
-BioPython|1.79|Biopython License Agreement|https://biopython.org/|Used for FASTA/FASTQ handling.
-BWA|0.7.17-r1198-dirty|GNU General Public License version 3.0 (GPLv3), MIT License|http://bio-bwa.sourceforge.net/|Used for nucleotide alignments.
-cutadapt|4.1|The MIT License|https://cutadapt.readthedocs.io/en/stable/|Adapter trmming and read filtering.
-Pandas|1.3.5|BSD-licensed library|https://pandas.pydata.org/|Pandas used for data handling, analyss, and reporting.
-Python|3.7.5|Python License Agreement (GPL-compatible)|https://www.python.org/|ViroSearch is written in Python.
-Samtools|1.9|The MIT License|http://www.htslib.org/|Samtools is used for SAM/BAM handling and mpileup generation.
-Snakemake|7.8.3|The MIT License|https://snakemake.readthedocs.io/|Snakemake is used for pipeline organization and execution.
-VarScan|2.4.3 (Non-Commercial Version)|https://github.com/dkoboldt/varscan/releases|http://dkoboldt.github.io/varscan/|Varant calling.
-ViroMatch|r.47|The MIT License|https://twylie.github.io/viromatch/|Calculates percent identity variance for mapped reads.
-vsearch|vsearch v2.21.1\_linux\_x86\_64|GNU General Public License version 3 or BSD 2-clause license (dual-licensed)|https://github.com/torognes/vsearch|The vsearch package is used for low-complexity read masking/filtering.
+BBTools|38.96|BBTools copyright Lawrence Berkeley National Laboratory.|[BBTools Guide](https://jgi.doe.gov/data-and-tools/software-tools/bbtools/bb-tools-user-guide/)|Repairs FASTQ file entry pairings.
+BioPython|1.79|Biopython License Agreement|[BioPython](https://biopython.org/)|Used for FASTA/FASTQ handling.
+BWA|0.7.17-r1198-dirty|GNU General Public License version 3.0 (GPLv3), MIT License|[BWA Home](http://bio-bwa.sourceforge.net/)|Used for nucleotide alignments.
+cutadapt|4.1|The MIT License|[Documentation](https://cutadapt.readthedocs.io/en/stable/)|Adapter trmming and read filtering.
+Pandas|1.3.5|BSD-licensed library|[Pandas Home](https://pandas.pydata.org/)|Pandas used for data handling, analyss, and reporting.
+Python|3.7.5|Python License Agreement (GPL-compatible)|[Python.org](https://www.python.org/)|ViroSearch is written in Python.
+Samtools|1.9|The MIT License|[Samtools Docs](http://www.htslib.org/)|Samtools is used for SAM/BAM handling and mpileup generation.
+Snakemake|7.8.3|The MIT License|[Snakemake Docs](https://snakemake.readthedocs.io/)|Snakemake is used for pipeline organization and execution.
+VarScan|2.4.3 (Non-Commercial Version)|[License Info](https://github.com/dkoboldt/varscan/releases)|[VarScan Home](http://dkoboldt.github.io/varscan/)|Varant calling.
+ViroMatch|r.47|The MIT License|[ViroMatch Docs](https://twylie.github.io/viromatch/)|Calculates percent identity variance for mapped reads.
+vsearch|vsearch v2.21.1\_linux\_x86\_64|GNU General Public License version 3 or BSD 2-clause license (dual-licensed)|[vsearch Home](https://github.com/torognes/vsearch)|The vsearch package is used for low-complexity read masking/filtering.
 
 
 # About ViroSearch
