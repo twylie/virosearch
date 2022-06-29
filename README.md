@@ -17,7 +17,7 @@
     + [Mapping Docker Volumes](#mapping-docker-volumes)
     + [Docker Execution](#docker-execution)
   * [Example Data Processing](#example-data-processing)
-  * [Example Data Processing (WashU Cluster)](#example-data-processing--washu-cluster-)
+  * [Example Data Processing WashU Cluster](#example-data-processing-washu-cluster)
 - [ViroSearch Commands](#virosearch-commands)
   * [Running Commands](#running-commands)
   * [ViroSearch Sub-Commands](#virosearch-sub-commands)
@@ -41,7 +41,7 @@
   * [Sample Key](#sample-key)
   * [Output File Types](#output-file-types)
   * [Snakemake](#snakemake)
-  * [Pipeline Steps (Rules)](#pipeline-steps--rules-)
+  * [Pipeline Steps](#pipeline-steps)
   * [Third Party Dependencies](#third-party-dependencies)
 - [About ViroSearch](#about-virosearch)
   * [Software Version](#software-version)
@@ -99,7 +99,7 @@ We assume that an end-user has a general background in running bioinformatics wo
 
 ## Inputs and Data Types
 
-The **ViroSearch** suite of tools expects paired-end, short read sequences. We have developed and tested **ViroSearch** using Illumina paired-end (100--150 bp) reads from Metagenomic Shotgun Sequencing (MSS) samples. Expected input files are paired (R1/R2) FASTQ files, either gzipped or uncompressed.
+The **ViroSearch** suite of tools expects paired-end, short read sequences. We have developed and tested **ViroSearch** using Illumina paired-end (100-150 bp) reads from Metagenomic Shotgun Sequencing (MSS) samples. Expected input files are paired (R1/R2) FASTQ files, either gzipped or uncompressed.
 
 For examples, see:
 
@@ -124,11 +124,12 @@ These references may also be reconstructed independently using the following com
 docker container run -v $PWD:/pwd twylie/virosearch:latest virosearch getref --email 'twylie@wustl.edu' --virosearch-db /pwd/REFS --acc-id 'NC_007605.1' 'NC_009334.1'
 docker container run -v $PWD:/pwd twylie/virosearch:latest virosearch indexref --virosearch-db /pwd/REFS
 ```
-See [virosearch getref](#virosearch-getref) and [Example Data Processing](#example-data-processing) for more examples of setting up reference genomes for **ViroSearch**.
+
+See [virosearch getref](https://github.com/twylie/virosearch#virosearch-getref) and [Example Data Processing](https://github.com/twylie/virosearch#example-data-processing) for more examples of setting up reference genomes for **ViroSearch**.
 
 ## Other Genome References
 
-Other genome reference files may also be added to a **ViroSearch** DB reference directory for downstream processing. See for [virosearch getref](#virosearch-getref) options for setting up reference genomes for **ViroSearch**.
+Other genome reference files may also be added to a **ViroSearch** DB reference directory for downstream processing. See [virosearch getref](https://github.com/twylie/virosearch#virosearch-getref) for options for setting up reference genomes for **ViroSearch**.
 
 ## Docker
 
@@ -218,11 +219,11 @@ As a general rule of thumb, we recommend starting with 16 GB of memory.
 
 **Disk Space**
 
-Disk space needed for **ViroSearch** processing can be considerable depending on the number of reads processed per sample, especially if the `--notemp` flag is passed to [Snakemake](https://snakemake.readthedocs.io/en/stable/) when executing the variant calling pipeline. A very rough estimation is to plan to start withh 25--50 Gb of **intermediate** output disk space for each for every 100 million reads evaluated.
+Disk space needed for **ViroSearch** processing can be considerable depending on the number of reads processed per sample, especially if the `--notemp` flag is passed to [Snakemake](https://snakemake.readthedocs.io/en/stable/) when executing the variant calling pipeline. A very rough estimation is to plan to start withh 25-50 Gb of **intermediate** output disk space for each for every 100 million reads evaluated.
 
 **Parallel Processing**
 
-Attempting to automate cluster processing for multiple off-site architectures is beyond the scope of this project; however, the default Snakemake setup provided by ViroSearch is a good starting point for customization to run in parallel on your own cluster environment. Inherent in Snakmake's DAG approach is the ability to run atomic processes independently. For users running **ViroSearch** at Washington University School of Medicine, parallel processing is supported---see [virosearch washupp](#virosearch-washupp) and [Example Data Processing (WashU Cluster)](#example-data-processing--washu-cluster-) for details.
+Attempting to automate cluster processing for multiple off-site architectures is beyond the scope of this project; however, the default Snakemake setup provided by ViroSearch is a good starting point for customization to run in parallel on your own cluster environment. Inherent in Snakmake's DAG approach is the ability to run atomic processes independently. For users running **ViroSearch** at Washington University School of Medicine, parallel processing is supported---see [virosearch washupp](https://github.com/twylie/virosearch#virosearch-washupp) and [Example Data Processing WashU Cluster](https://github.com/twylie/virosearch#example-data-processing-washu-cluster) for details.
 
 ## Test Data Set and Sample Key
 
@@ -230,15 +231,14 @@ We provide a small Metagenomic Shotgun Sequencing (MSS) test set of 100,000 pair
 
 You may download the test FASTQ files and associated sample key here:
 
-[example/fastq/sample1.100k.r1.fastq.gz](example/fastq/sample1.100k.r1.fastq.gz)
-[example/fastq/sample1.100k.r2.fastq.gz](example/fastq/sample1.100k.r2.fastq.gz)
+[example/fastq/](example/fastq/) \
 [example/pe_samples.tsv](example/pe_samples.tsv)
 
-To run the sample key and corresponding test data through the **ViroSearch** pipeline, see [Tutorials](#tutorials).
+To run the sample key and corresponding test data through the **ViroSearch** pipeline, see [Tutorials](https://github.com/twylie/virosearch#tutorials).
 
 ## Recommended Parameters for EBV Variant Calling
 
-Read filtering and variant calling parameters can have a very large affect on the number of potential variants called on a sample. Reference genome complexity---e.g. repeat content, nucleotide distribution, rearrangements---can also contribute to potential false positive variant rates. Requirements for read-depth coverage prior to calling variants can also help weed out potential noise. For these reasons, **ViroSearch** tools have many options and settings (see [virosearch varcallpe Arguments](#arguments-2) for related options).
+Read filtering and variant calling parameters can have a very large affect on the number of potential variants called on a sample. Reference genome complexity---e.g. repeat content, nucleotide distribution, rearrangements---can also contribute to potential false positive variant rates. Requirements for read-depth coverage prior to calling variants can also help weed out potential noise. For these reasons, **ViroSearch** tools have many options and settings (see [virosearch varcallpe Arguments](https://github.com/twylie/virosearch#arguments-2) for related options).
 
 For example, the most lenient version of running the pipeline would skip read preparation and filtering, skip percent identity variance filtering for mapped reads, would not deduplicate mapped reads, promotes all SAM/BAM mapped read types to variant calling, and runs all variant calling parameters at their default. We would expect the following settings to produce some percentage of false positive variant calls:
 
@@ -282,8 +282,6 @@ virosearch varcallpe \
 
 ### Mapping Docker Volumes
 
-*Docker Needs to See Your Files*
-
 Regardless of whether you use an interactive session or command line execution, you will need to map your local directories to the Docker container. Once inside a container, Docker doesn’t understand your local file system unless you explicitly tell it how things are mapped. The volume mapping convention is of the form `/local:/container`---i.e. we are mapping a local directory to an alias that will point to the directory within the Docker container, as passed on the command line using the `-v` option. All local directories that you wish Docker to see must be mapped in this way. 
 
 See [Docker Use Volumes](https://docs.docker.com/storage/volumes/) for examples of how Docker `-v` volume mapping is accomplished.
@@ -307,7 +305,7 @@ For details on running Docker sessions, see:
 
 Instructions for downloading and running the test EBV-positive MSS sample through the **ViroSearch** variant calling pipeline follow. In this example, we will download the test EBV data, associate a sample key, and call variants against two RefSeq EBV reference genomes.
 
-You should have Docker Desktop and the **ViroSearch** Docker image installed on your system prior to running these commands---see [Docker](#docker), [Download the ViroSearch Docker Image](#download-the-virosearch-docker-image), and [Tutorials: Docker](#docker-1).
+You should have Docker Desktop and the **ViroSearch** Docker image installed on your system prior to running these commands---see [Docker](https://github.com/twylie/virosearch#docker), [Download the ViroSearch Docker Image](https://github.com/twylie/virosearch#download-the-virosearch-docker-image), and [Tutorials: Docker](https://github.com/twylie/virosearch#docker-1).
 
 Steps:
 
@@ -489,7 +487,7 @@ Variant-specific output files are here:
 + RESULTS/smk/18_write_read_counts/TestSampleOne__NC_007605.1.counts
 + RESULTS/smk/18_write_read_counts/TestSampleOne__NC_009334.1.counts
 
-## Example Data Processing (WashU Cluster)
+## Example Data Processing WashU Cluster
 
 > **Warning**
 > WARNING!!! This tutorial is only for users at Washington University School of Medicine. It is tailored for parallel processing using the LSF system at RIS.
@@ -665,14 +663,14 @@ cd /scratch1/fs1/twylie/testing/RESULTS/
 LSF_DOCKER_VOLUMES='/home/twylie:/home/twylie /scratch1/fs1/twylie:/scratch1/fs1/twylie /storage1/fs1/PTLD/Active:/storage1/fs1/PTLD/Active' bsub -M 16G -R "select[mem>16G] rusage[mem=16G]" -G compute-twylie -q general -e $PWD/LSF.err -o $PWD/LSF.out -a 'docker(twylie/virosearch:latest)' $PWD/washu.sh
 ```
 
-Jobs are now submitted to LSF via the Snakemake command. Jobs that can be run in parallel will be processed as such. Check the `LSF.err` and `LSF.out` processing logs (as well as `bjobs`) for progress. The `lsf_logs/` directory will contain child process logs. By default, we ran a possible 100 jobs in parallel when setting up with the `virosearch washupp` command---see [virosearch washupp](#virosearch-washupp) and [Example Data Processing (WashU Cluster)](#example-data-processing--washu-cluster-) for changing LSF parameters. The `LSF.err` can also show the progress of the Snakemake pipeline and executed steps.
+Jobs are now submitted to LSF via the Snakemake command. Jobs that can be run in parallel will be processed as such. Check the `LSF.err` and `LSF.out` processing logs (as well as `bjobs`) for progress. The `lsf_logs/` directory will contain child process logs. By default, we ran a possible 100 jobs in parallel when setting up with the `virosearch washupp` command---see [virosearch washupp](https://github.com/twylie/virosearch#virosearch-washupp) and [Example Data Processing WashU Cluster](https://github.com/twylie/virosearch#example-data-processing-washu-cluster) for changing LSF parameters. The `LSF.err` can also show the progress of the Snakemake pipeline and executed steps.
 
 
 # ViroSearch Commands
 
 ## Running Commands
 
-**ViroSearch** is a suite of tools that may be run from the command line interface. You may run **ViroSearch** commands in an interactive Docker session or as a Docker mediated command. See ==TK== for details on running Docker. After you have downloaded the latest **ViroSearch** Docker image ([https://github.com/twylie/virosearch](https://github.com/twylie/virosearch)), type the following to see the current list of top-level commands.
+**ViroSearch** is a suite of tools that may be run from the command line interface. You may run **ViroSearch** commands in an interactive Docker session or as a Docker mediated command. See [Docker](https://github.com/twylie/virosearch#docker), [Download the ViroSearch Docker Image](https://github.com/twylie/virosearch#download-the-virosearch-docker-image), and [Tutorials: Docker](https://github.com/twylie/virosearch#docker-1) for details on running Docker. After you have downloaded the latest **ViroSearch** Docker image ([https://github.com/twylie/virosearch](https://github.com/twylie/virosearch)), type the following to see the current list of top-level commands.
 
 **Command:**
 
@@ -1165,7 +1163,7 @@ REFS
 The **ViroSearch** `varcallpe` command prepares paired-end short read data for running the mapping and variant calling pipeline. This command will create a processing directory, associate sequencing reads and reference genomes, configure all pipeline parameters, and provide an example command for executing the variant calling pipeline. As this command prepares a pipeline---i.e. multiple component steps and algorithms---there are many arguments available for this command. Before running this command, it is recommended that you become familiar with all of the available options and settings.
 
 > **Note**
-> This command prepares a processing directory but does not automatically execute the pipeline. See ==TK== tutorials for recommended best practices for EBV variant processing and examples of running a variant calling pipeline instance.
+> This command prepares a processing directory but does not automatically execute the pipeline. See [Recommended Parameters for EBV Variant Calling](https://github.com/twylie/virosearch#recommended-parameters-for-ebv-variant-calling) and [Example Data Processing](https://github.com/twylie/virosearch#example-data-processing) tutorials for recommended best practices for EBV variant processing and examples of running a variant calling pipeline instance.
 
 View the current arguments for `virosearch varcallpe` command:
 
@@ -1236,7 +1234,7 @@ docker container run -v $PWD:/pwd twylie/virosearch:latest /pwd/PROCESSING/cmd.s
 
 These first three commands, in succession, will prepare an instance of the **ViroSearch** variant calling pipeline. Command one downloads the required reference genome sequence. Command two indexes the reference genome sequence for mapping and analysis. Command three prepares a bare/minimal instance of the variant calling pipeline. In command three, we are using all of the default paramters for the `virosearch varcallpe` command, only supplying the required arguments for the command.
 
-The supplied `--sample-key` argument in this case points to a very small tab-delimited file that associates samples to reference genomes (see ==TK== for details on this format).
+The supplied `--sample-key` argument in this case points to a very small tab-delimited file that associates samples to reference genomes (see [Sample Key](https://github.com/twylie/virosearch#sample-key) for details on this format).
 
 ```plaintext
 TestSampleOne	NC_007605.1 NC_009334.1	/testing/sample1.100k.r1.fastq.gz	/testing/sample1.100k.r2.fastq.gz
@@ -1444,7 +1442,7 @@ The commands here are the same as those in the `virosearch varcallpe` example ab
 
 `washu.yaml` -- The configuration file used by the `submit_lsf.py` LSF submission script. Do not edit this script.
 
-`washu.sh` --- An example Snakemake command for launching parallel processing at WashU. Should be launched as its own LSF job---see ==TK== for details.
+`washu.sh` --- An example Snakemake command for launching parallel processing at WashU. Should be launched as its own LSF job---see [Example Data Processing WashU Cluster](https://github.com/twylie/virosearch#example-data-processing-washu-cluster) for details.
 
 **Results:**
 
@@ -1551,7 +1549,7 @@ The **ViroSearch** suite of tools expects paired-end, short read sequences. We h
 
 You will need to supply a sample key file as input to the `virosearch varcallpe` command when running the variant calling portion of **ViroSearch**. This file associates multiple sequencing samples with reference genomes for alignment variant calling. The sample key should be a tab-delimited file with four columns: 1) sample id; 2) list of reference genomes (space-delimited field); 3) path to FASTQ R1 file; 4) path to FASTQ R2 file. 
 
-An example sample key is provided as part of the TK tutorial:
+An example sample key is provided as part of [Example Data Processing](https://github.com/twylie/virosearch#example-data-processing):
 
 [example/pe_samples.tsv](example/pe_samples.tsv)
 
@@ -1566,7 +1564,7 @@ The sample id field (1) should be a simple string, **no spaces or wildcards**, t
 
 ## Output File Types
 
-**ViroSearch** also generates a number of intermediate files during the the mapping and variant calling pipeline that may be of interest to an end-user. See pipeline step details ==TK== for more information on output files per pipeline step. In the interest of disk space conservation, many of these files are marked as "intermediate" and are removed by the variant calling pipeline when no longer needed. To retain all files generated by the pipeline, run the top-level Snakemake execution command with the `--notemp` flag.
+**ViroSearch** also generates a number of intermediate files during the the mapping and variant calling pipeline that may be of interest to an end-user. See [Pipeline Steps](https://github.com/twylie/virosearch#pipeline-steps) for more information on output files per pipeline step. In the interest of disk space conservation, many of these files are marked as "intermediate" and are removed by the variant calling pipeline when no longer needed. To retain all files generated by the pipeline, run the top-level Snakemake execution command with the `--notemp` flag.
 
 There are a few major file types created by **ViroSearch** that are of interest for variant analysis review. For each reference-sample pair, **ViroSearch** generates: 1) a SNP VCF report; 2) an INDEL VCF report; a variant call read counts file. These file types are retained regardless of running the Snakemake pipeline with or without the `--notemp` flag. The SNP and INDEL variant reports are standard VCF format---see [Variant Call Format](https://en.wikipedia.org/wiki/Variant_Call_Format) for details. The read counts file is generated alongside variant calling to indicate per-locus read depth and associated base-position quality.
 
@@ -1630,7 +1628,7 @@ All of the steps (rules in Snakemake terminology) in the pipeline are defined an
 
 The Snakefile is technically the pipeline in terms of code that defines and executes all of the steps in a specific order. This file (along with the configuration file) are used by Snakemake to execute the pipeline. Please note that the Snakefile contains calls to other third-party executables---e.g. BWA, Samtools, VarScan, etc. Also, **ViroSearch** specific code is also called in this manner. The Snakefile is essentially the recipe or protocol for the **ViroSearch** pipeline.
 
-## Pipeline Steps (Rules)
+## Pipeline Steps
 
 Here is a conceptual overview---or rule graph---of the steps in the variant calling portion of **ViroSearch**.
 
@@ -1677,11 +1675,11 @@ All of the FASTQ sequence files, provided by the `--sample-key` file path argume
 
 4. **trim_adapter_sequences**
 
-*OPTIONAL STEP*: The paired FASTQ files are adaptor trimmed in this step. Reads will be trimmed for adaptor, sequences will be trimmed/revised based on end-quality, reads will be filtered based on the percent of N’s allowed post-trimming, and too-short reads will be removed. This step is run by default; however, providing the `--no-trim` flag will skip over this step in the pipeline. See ==TK== for related options.
+*OPTIONAL STEP*: The paired FASTQ files are adaptor trimmed in this step. Reads will be trimmed for adaptor, sequences will be trimmed/revised based on end-quality, reads will be filtered based on the percent of N’s allowed post-trimming, and too-short reads will be removed. This step is run by default; however, providing the `--no-trim` flag will skip over this step in the pipeline. See [Arguments](https://github.com/twylie/virosearch#arguments-2) for related options.
 
 5. **filter_low_complexity**
 
-*OPTIONAL STEP*: The paired FASTQ files are evaluated for low-complexity in this step. Low-complexity bases are "hard masked" as N’s in this step. Reads will also be filtered based on the percent of Ns allowed post-trimming. This step is run by default; however, providing the `--no-lcf` flag will skip over this step in the pipeline. See ==TK== for related options.
+*OPTIONAL STEP*: The paired FASTQ files are evaluated for low-complexity in this step. Low-complexity bases are "hard masked" as N’s in this step. Reads will also be filtered based on the percent of Ns allowed post-trimming. This step is run by default; however, providing the `--no-lcf` flag will skip over this step in the pipeline. See [Arguments](https://github.com/twylie/virosearch#arguments-2) for related options.
 
 6. **repair_fastq**
 
@@ -1697,18 +1695,18 @@ For all of the mappings, we write a SAM file containing only mapped reads.
 
 9. **percent_identity_variance_filter_sam**
 
-*OPTIONAL STEP*: The percent identity variance filter (PIDV) evaluates all mapped reads on a per-hit basis, evaluating the percent variance/difference from its reference genome placement. Hits not meeting a PIDV requirement (see ==TK== for related options) will be removed from downstream processing. The PIDV step will produce a SAM file that can have a mixture of PE and singleton reads of mapped and unmapped reads. Therefore, output from the PIDV filter step---or the `--no-pidv` skipped version---will be a SAM file ready for samtools view filtering based on SAM/BAM flags.
+*OPTIONAL STEP*: The percent identity variance filter (PIDV) evaluates all mapped reads on a per-hit basis, evaluating the percent variance/difference from its reference genome placement. Hits not meeting a PIDV requirement will be removed from downstream processing. The PIDV step will produce a SAM file that can have a mixture of PE and singleton reads of mapped and unmapped reads. Therefore, output from the PIDV filter step---or the `--no-pidv` skipped version---will be a SAM file ready for samtools view filtering based on SAM/BAM flags. See [Arguments](https://github.com/twylie/virosearch#arguments-2) for related options.
 
 10. **sam_to_bam_mapped_reads**
 
-We now convert the SAM file to BAM for input to creating a mpileup file required for variant calling. The resultant BAM file will be determined by the samtools view arguments provided in the configuration file. For example, if the `--only-properly-paired` flag was supplied, then we will only output properly paired reads in the BAM file. If `--no-singletons` was supplied, no singletons will be included in the BAM file. See ==TK== for other options in defining which hits will be included in the BAM and considered during diownstream variant calling.
+We now convert the SAM file to BAM for input to creating a mpileup file required for variant calling. The resultant BAM file will be determined by the samtools view arguments provided in the configuration file. For example, if the `--only-properly-paired` flag was supplied, then we will only output properly paired reads in the BAM file. If `--no-singletons` was supplied, no singletons will be included in the BAM file. Other options also define which hits will be included in the BAM and considered during downstream variant calling. See [Arguments](https://github.com/twylie/virosearch#arguments-2) for related options.
 
 11. **name_sort_mapped_bam**
 12. **fixmate_bam**
 13. **coordinate_sort_mapped_bam**
 14. **mark_duplicates_bam**
 
-*OPTIONAL STEP*: This entire section runs conceptually as a block; all steps are required for marking and removing mapped read duplicates. Deduplication may be skipped entirely if the `--no-dedup` flag was provided. In order to mark and remove duplicates, we will fix the mate pair score information and associated fields in the BAM using samtools fixmate. Prior to running fixmate, the BAM must be name sorted; however, the BAM must be sorted on mapped read coordinates prior to running samtools markdup. The final BAM will have had duplicates removed. Id the deduplication step is skipped, then the BAM is only coordinate sorted in this step.
+*OPTIONAL STEP*: This entire section runs conceptually as a block; all steps are required for marking and removing mapped read duplicates. Deduplication may be skipped entirely if the `--no-dedup` flag was provided. In order to mark and remove duplicates, we will fix the mate pair score information and associated fields in the BAM using samtools fixmate. Prior to running fixmate, the BAM must be name sorted; however, the BAM must be sorted on mapped read coordinates prior to running samtools markdup. The final BAM will have had duplicates removed. Id the deduplication step is skipped, then the BAM is only coordinate sorted in this step. See [Arguments](https://github.com/twylie/virosearch#arguments-2) for related options.
 
 15. **bam_to_mpileup**
 
@@ -1716,15 +1714,15 @@ In order to call variants, we must produce an input mpileup file for each mapped
 
 16. **call_SNPs**
 
-The mpileup representation of mapped reads is used to call single nucleotide variants in this step. Output will be a [VCF file](https://en.wikipedia.org/wiki/Variant_Call_Format) for each mapping association. See ==TK== for related variant calling options.
+The mpileup representation of mapped reads is used to call single nucleotide variants in this step. Output will be a [VCF file](https://en.wikipedia.org/wiki/Variant_Call_Format) for each mapping association. See [Arguments](https://github.com/twylie/virosearch#arguments-2) for related options.
 
 17. **call_indels**
 
-The mpileup representation of mapped reads is used to call small INDELs in this step. Output will be a [VCF file](https://en.wikipedia.org/wiki/Variant_Call_Format) for each mapping association. See ==TK== for related variant calling options.
+The mpileup representation of mapped reads is used to call small INDELs in this step. Output will be a [VCF file](https://en.wikipedia.org/wiki/Variant_Call_Format) for each mapping association. See [Arguments](https://github.com/twylie/virosearch#arguments-2) for related options.
 
 18. **write_read_counts**
 
-We write read coverage metrics of reference genomes for the variant calls based on input mpileup files. Coverage depth requirements may be altered with the `--counts-min-coverage` and `--counts-min-base-qual` arguments. See ==TK== for related read count options.
+We write read coverage metrics of reference genomes for the variant calls based on input mpileup files. Coverage depth requirements may be altered with the `--counts-min-coverage` and `--counts-min-base-qual` arguments. See [Arguments](https://github.com/twylie/virosearch#arguments-2) for related options.
 
 ## Third Party Dependencies
 
