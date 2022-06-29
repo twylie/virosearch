@@ -1142,7 +1142,7 @@ virosearch varcallpe|no-supplemental|FLAG|no|False|Remove reads flagged as suppl
 virosearch varcallpe|no-singletons|FLAG|no|False|Remove reads flagged as singleton alignments prior to variant calling.
 virosearch varcallpe|only-properly-paired|FLAG|no|False|Enforce properly paired read alignments when calling variants.
 virosearch varcallpe|mpileup-max-depth|INT|no|0|Max per-file depth as used by mpileup to avoid excessive memory usage. Default of 0 does not define a maximum depth.
-virosearch varcallpe|trim-adapter|STR [STR …]|no|<sub>AGATCGGAAGAGCACACGTCTGAACTCCAGTCA AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT</sub>|Space delimited list of adapter sequences to trim. The default sequences are Illumina TruSeq™ single index and TruSeq™ CD index sequences.
+virosearch varcallpe|trim-adapter|STR [STR …]|no|Illumina TruSeq adapters*|Space delimited list of adapter sequences to trim. The default sequences are Illumina TruSeq™ single index and TruSeq™ CD index sequences.
 virosearch varcallpe|trim-quality-base|INT|no|33|Sets FASTQ quality encoding of 33 or (older) 64 for trimming purposes. 
 virosearch varcallpe|trim-quality-cutoff|INT|no|10|Trim 3'-end when quality drops below given value; may alter sequence length.
 virosearch varcallpe|trim-minimum-length|INT|no|50|Minimum required read length after trimming, or will be removed from downstream processing.
@@ -1165,6 +1165,10 @@ virosearch varcallpe|indel-p-value|FLOAT|no |0.99|Default p-value threshold for 
 virosearch varcallpe|indel-strand-filter|INT|no|1|Ignore variants with more than 90 percent support on one strand for INDELs. (1=True; 0=False)
 virosearch varcallpe|counts-min-coverage|INT|no|1|Minimum read depth at a position to make a call and include in count coverage.
 virosearch varcallpe|counts-min-base-qual|INT|no|20|Minimum base quality at a position to count a read and include in count coverage.
+
+*Illumina TruSeq™ adapters: \
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA \
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
 
 #### Example 1
 
