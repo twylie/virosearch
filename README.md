@@ -5,7 +5,7 @@
 > **Warning**
 > This resource is intended for purely research purposes. It should not be used for emergencies or medical or professional advice.
 
-Here we provide a self-contained suite of tools to download and index reference genome sequences of interest, map paired-end short read sequence data against multiple reference genomes, and subsequently call single nucleotide variants (SNVs) and small insertion/deletions (INDELs). The variant calling portion of **ViroSearch** is written using [Snakemake](https://snakemake.readthedocs.io/en/stable/), which provides a robust, reproducible method for analyzing large-scale genomic data sets. The **ViroSearch** code-base and underlying dependencies are provided as a [Docker](https://www.docker.com/) image; no installation is required by the end-user.
+Here we provide a self-contained suite of tools to [download](https://hub.docker.com/r/twylie/virosearch) and index reference genome sequences of interest, map paired-end short read sequence data against multiple reference genomes, and subsequently call single nucleotide variants (SNVs) and small insertion/deletions (INDELs). The variant calling portion of **ViroSearch** is written using [Snakemake](https://snakemake.readthedocs.io/en/stable/), which provides a robust, reproducible method for analyzing large-scale genomic data sets. The **ViroSearch** code-base and underlying dependencies are provided as a [Docker](https://www.docker.com/) image; no installation is required by the end-user.
 
 While the impetuous for developing **ViroSearch** was to study Epstein Barr Virus (EBV) associated sequence variants within hundreds of samples derived from patients with post-transplant lymphoproliferative disorders (PTLDs), the **ViroSearch** suite of tools provides a generic platform for downloading other reference genomes and calling sample-associated variants. 
 
@@ -106,7 +106,9 @@ An in depth overview of Docker is beyond the scope of this documentation; howeve
 
 **ViroSearch Docker Image**
 
-While the **ViroSearch** code base is hosted at [https://github.com/twylie/virosearch](https://github.com/twylie/virosearch), we only support using the official Docker image. Docker Desktop is required on your computer in order to run **ViroSearch** containers. All required code and third party dependencies are included in the **ViroSearch** Docker image. Once you’ve installed Docker Desktop (and the Docker service is running on your system) you will be able to download the **ViroSearch** Docker image. To test that Docker Desktop is installed and running correctly on your computer, you may type the following in a terminal.
+URL: [https://hub.docker.com/r/twylie/virosearch](https://hub.docker.com/r/twylie/virosearch)
+
+While the **ViroSearch** code base is hosted at [https://github.com/twylie/virosearch](https://github.com/twylie/virosearch), we only support using the [official Docker image](https://hub.docker.com/r/twylie/virosearch). Docker Desktop is required on your computer in order to run **ViroSearch** containers. All required code and third party dependencies are included in the **ViroSearch** Docker image. Once you’ve installed Docker Desktop (and the Docker service is running on your system) you will be able to download the **ViroSearch** Docker image. To test that Docker Desktop is installed and running correctly on your computer, you may type the following in a terminal.
 
 **Command:**
 
