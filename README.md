@@ -158,7 +158,7 @@ ViroSearch (Revision 18)
 
 ## System Resources and Benchmarks
 
-In terms of disk space and memory, requirements vary depending on the size and complexity of the samples you are processing. We have run **ViroSearch** on pilot samples, ranging from 370 thousand to over 43 million reads processed per sample. A pilot sample review of 81 samples (~700 million total reads) was run through the variant calling portion of **ViroSearch** with 16 GB of memory and 50 GB of output disk space in 1:06 run time across 100 cluster jobs.
+In terms of disk space and memory, requirements vary depending on the size and complexity of the samples you are processing. We have run **ViroSearch** on pilot samples, ranging from 370 thousand to over 43 million reads processed per sample. A pilot sample review of 81 samples (~700 million total reads) was run through the variant calling portion of **ViroSearch** with 16 GB of memory and 50 GB of final output disk space in 1:06 run time across 100 cluster jobs.
 
 General resources and benchmarks are outlined on this page as broad guidelines. It is not possible to give exact requirements for resources---e.g. processing time, memory, disk space---*a priori*, as these resources are highly dependent on the viral complexity of the sequencing reads being evaluated. If a very large portion of the reads are viral, then processing will likely take longer and use more resources when compared to a sample with fewer viral reads.
 
@@ -168,7 +168,7 @@ As a general rule of thumb, we recommend starting with 16 GB of memory.
 
 **Disk Space**
 
-Disk space needed for **ViroSearch** processing can be considerable depending on the number of reads processed per sample, especially if the `--notemp` flag is passed to [Snakemake](https://snakemake.readthedocs.io/en/stable/) when executing the variant calling pipeline. A very rough estimation is to plan to start withh 25-50 Gb of **intermediate** output disk space for each for every 100 million reads evaluated.
+Disk space needed for **ViroSearch** processing can be considerable depending on the number of reads processed per sample, especially if the `--notemp` flag is passed to [Snakemake](https://snakemake.readthedocs.io/en/stable/) when executing the variant calling pipeline. A very rough estimation is to plan to start withh ~115 Gb of **intermediate** output disk space for every 100 million reads evaluated; this may need to increased as needed.
 
 **Parallel Processing**
 
@@ -1661,6 +1661,12 @@ We now convert the SAM file to BAM for input to creating a mpileup file required
 
 *OPTIONAL STEP*: This entire section runs conceptually as a block; all steps are required for marking and removing mapped read duplicates. Deduplication may be skipped entirely if the `--no-dedup` flag was provided. In order to mark and remove duplicates, we will fix the mate pair score information and associated fields in the BAM using samtools fixmate. Prior to running fixmate, the BAM must be name sorted; however, the BAM must be sorted on mapped read coordinates prior to running samtools markdup. The final BAM will have had duplicates removed. Id the deduplication step is skipped, then the BAM is only coordinate sorted in this step. See [varcallpe Arguments](https://github.com/twylie/virosearch#varcallpe-arguments) for related options.
 
+Deduplication, while reductive in terms of data, can provide a benefit in reducing false positive variant calls by reducing artifacts and inflated coverage introduced by library prep PCR amplification. The following examples show the same variant call under full, raw coverage (1100x) and after mapping deduplication (16x). We can see that the 1100x coverage has the same read pairs stacked exactly in the same position, while the deduplication has reduced the coverage to those reads that are staggered across that area of the reference genome. Note that deduplication will reduce read depth-of-coverage for a reference genome, as well as potentially reducing breadth-of-coverage.
+
+<img src="docs/coverage_1100x_raw_coverage.png" width="100%" height="75%" border=0 style="border:0; text-decoration:none; outline:none">
+
+<img src="docs/coverage_16x_dedup.png" width="100%" height="75%" border=0 style="border:0; text-decoration:none; outline:none"> 
+
 15. **bam_to_mpileup**
 
 In order to call variants, we must produce an input mpileup file for each mapped BAM file. Here we match the BAM file with the associated reference genome the reads were aligned against. By default the allowed depth is not constrained, but this value may be altered with the `--mpileup-max-depth` argument. By default, the mpileup file is an intermediate file and will be removed after variants are called. To retain the mpileup file, pass the `--notemp` flag to Snakemake when executing the variant calling pipeline.
@@ -1784,8 +1790,8 @@ The approach used in **ViroSearch** was formulated during the PTLD-MSMS project 
 
 The following grants have provided funding in part for development of **ViroSearch**:
 
-+ *Metagenomic shotgun microbial sequencing in post-transplant lymphoproliferative disorders (PTLD-MSMS)*, PI: V. Dharnidharka, [R01 AI142135](https://reporter.nih.gov/search/gjbkbkPNuEeki_7BpU36Pw/project-details/10426126)
-+ *The Vaginal Microbiome, Maternal Response, and Preterm Birth*, PIs: K. Wylie and M. Stout, [R01 HD095986](https://reporter.nih.gov/search/vm0cTbOxsk23dep5DnCZsQ/project-details/10242865)
++ *Metagenomic shotgun microbial sequencing in post-transplant lymphoproliferative disorders (PTLD-MSMS)*, PI: V. Dharnidharka, [NIAD R01 AI142135](https://reporter.nih.gov/search/gjbkbkPNuEeki_7BpU36Pw/project-details/10426126)
++ *The Vaginal Microbiome, Maternal Response, and Preterm Birth*, PIs: K. Wylie and M. Stout, [NIH R01 HD095986](https://reporter.nih.gov/search/vm0cTbOxsk23dep5DnCZsQ/project-details/10242865)
 + *Tools for Automated Interpretation of Viruses from Next-Generation Sequencing Data*, PI: T. Wylie, [NIH CTSA UL1TR002345](https://reporter.nih.gov/search/X2L6sKKOdkye4rgIxoZo5g/project-details/9672985)
 
 ## Disclaimer
